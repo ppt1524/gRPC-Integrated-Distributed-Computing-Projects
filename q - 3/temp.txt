@@ -1,0 +1,3 @@
+openssl genpkey -algorithm RSA -out rider_client.key
+openssl req -new -key rider_client.key -out rider_client.csr -config openssl.cnf
+openssl x509 -req -in rider_client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out rider_client.crt -days 365 -extensions v3_req -extfile openssl.cnf

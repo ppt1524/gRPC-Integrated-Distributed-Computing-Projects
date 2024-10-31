@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package ridesharing;
+
+option go_package = "/";
+
+// Rider Messages
+message RideRequest {
+  string rider_id = 1;
+  string pickup_location = 2;
+  string destination = 3;
+}
+
+message RideResponse {
+  string ride_id = 1;
+  string driver_id = 2;
+  string status = 3;
+}
+
+// Ride Status
+message RideStatusRequest {
+  string rider_id = 1;
+  string ride_id = 2;
+}
+
+message RideStatusResponse {
+  string ride_id = 1;
+  string status = 2;
+  string driver_id = 3;
+}
+
+// Driver Messages
+message AcceptRideRequest {
+  string driver_id = 1;
+  string ride_id = 2;
+}
+
+message AcceptRideResponse {
+  string status = 1;
+}
+
+message RejectRideRequest {
+  string driver_id = 1;
+  string ride_id = 2;
+}
+
+message RejectRideResponse {
+  string status = 1;
+}
+
+message RideCompletionRequest {
+  string driver_id = 1;
+  string ride_id = 2;
+}
+
+message RideCompletionResponse {
+  string status = 1;
+}
+
+// Service Definition
+service RideSharingService {
+  // Rider Methods
+  rpc RequestRide(RideRequest) returns (RideResponse);
+  rpc GetRideStatus(RideStatusRequest) returns (RideStatusResponse);
+
+  // Driver Methods
+  rpc AcceptRide(AcceptRideRequest) returns (AcceptRideResponse);
+  rpc RejectRide(RejectRideRequest) returns (RejectRideResponse);
+  rpc CompleteRide(RideCompletionRequest) returns (RideCompletionResponse);
+}

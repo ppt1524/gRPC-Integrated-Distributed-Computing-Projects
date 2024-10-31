@@ -1,0 +1,7 @@
+fastapi
+grpcio
+grpcio-tools
+protobuf
+uvicorn[standard]
+websockets
+aiofiles

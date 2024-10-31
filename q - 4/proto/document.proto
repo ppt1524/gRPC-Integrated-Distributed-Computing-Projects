@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package docservice;
+
+service DocumentService {
+  rpc StreamUpdates (stream UpdateRequest) returns (stream UpdateResponse) {}
+  rpc GetDocument (GetDocumentRequest) returns (GetDocumentResponse) {}
+  rpc LogUpdates (UpdateRequest) returns (stream LogResponse) {}
+}
+
+message UpdateRequest {
+  string content = 1;
+  string client_id = 2;
+}
+
+message UpdateResponse {
+  string content = 1;
+  string client_id = 2;
+  bool success = 3;
+  string error_message = 4;
+}
+
+message GetDocumentRequest {}
+
+message GetDocumentResponse {
+  string content = 1;
+}
+
+message LogResponse {
+  string message = 1;
+  string timestamp = 2;
+}
